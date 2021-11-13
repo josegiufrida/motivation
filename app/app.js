@@ -3,6 +3,9 @@
 var $  = document.getElementById.bind(document);
 var $$ = document.querySelectorAll.bind(document);
 
+var month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 var App = function($el){
   this.$el = $el;
   this.load();
@@ -48,7 +51,8 @@ App.fn.renderChoose = function(){
 };
 
 App.fn.renderAgeLoop = function(){
-  this.interval = setInterval(this.renderAge.bind(this), 100);
+  (this.renderAge.bind(this))();
+  this.interval = setInterval(this.renderAge.bind(this), 60000);  // Update every 1 minute
 };
 
 App.fn.renderAge = function(){
@@ -56,12 +60,35 @@ App.fn.renderAge = function(){
   var duration  = now - this.dob;
   var years     = duration / 31556900000;
 
-  var majorMinor = years.toFixed(9).toString().split('.');
+  // Age
+  var majorMinor = years.toFixed(2).toString().split('.');
+
+  // Month day
+  var day = now.getDate();
+  var month = month_names_short[now.getMonth()].toUpperCase();
+
+  // Days until end of year
+  var one_day=1000*60*60*24;
+  var next_year = new Date((now.getFullYear() + 1), 0, 1);
+  var next_year_days_left = Math.ceil( (next_year.getTime() - now.getTime()) / (one_day) );
+
+  // Life expectancy
+  var lifeExpectancy = 82.3; // google.com/search?q=life+expectancy+canada
+  var majorMinorExpectancy = (lifeExpectancy - years).toFixed(2).toString().split('.');
+
 
   requestAnimationFrame(function(){
     this.html(this.view('age')({
       year:         majorMinor[0],
-      milliseconds: majorMinor[1]
+      milliseconds: majorMinor[1],
+
+      day: day,
+      month: month,
+
+      next_year_days_left: next_year_days_left,
+
+      yearExpectancy: majorMinorExpectancy[0],
+      millisExpectancy: majorMinorExpectancy[1],
     }));
   }.bind(this));
 };

@@ -24,8 +24,28 @@ body {
 }
 
 body, input {
-  display: -webkit-flex;
   font-family: 'Avenir', 'helvetica neue', helvetica, arial, sans-serif;
+  background: #1f1f1f
+}
+
+.container {
+  height: 100vh;
+  width: 70vw;
+
+  margin: auto;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+
+.cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .age-label {
@@ -85,14 +105,3 @@ footer {
   -webkit-flex-direction: row;
   -webkit-justify-content: center;
 }
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #494949;
-  }
-
-  .count {
-    color: #fff;
-  }
-}
-

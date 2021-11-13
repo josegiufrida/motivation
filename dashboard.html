@@ -24,8 +24,39 @@
 </script>
 
 <script id="age-template" type="text/x-handlebars-template">
-  <h1 class="age-label">AGE</h1>
-  <h2 class="count">{{year}}<sup>.{{milliseconds}}</sup></h2>
+  
+  <div class="container">
+    
+    <div class="cell">
+      <div>
+        <h1 h1 class="age-label">AGE</h1>
+        <h2 class="count">{{year}}<sup>.{{milliseconds}}</sup></h2>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div>
+        <h1 class="age-label">DAY</h1>
+        <h2 class="count">{{day}}<sup>{{month}}</sup></h2>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div>
+        <h1 class="age-label">DAYS LEFT</h1>
+        <h2 class="count">{{next_year_days_left}}<sup>/ 365</sup></h2>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div>
+        <h1 class="age-label">YEARS LEFT</h1>
+        <h2 class="count">{{yearExpectancy}}<sup>.{{millisExpectancy}}</sup></h2>
+      </div>
+    </div>
+
+  </div>
+
 </script>
 
 <script src="js/handlebars.js"></script>
