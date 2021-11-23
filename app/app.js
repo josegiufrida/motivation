@@ -3,8 +3,8 @@
 var $  = document.getElementById.bind(document);
 var $$ = document.querySelectorAll.bind(document);
 
-var month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 var App = function($el){
   this.$el = $el;
@@ -65,16 +65,16 @@ App.fn.renderAge = function(){
 
   // Month day
   var day = now.getDate();
-  var month = month_names_short[now.getMonth()].toUpperCase();
+  var month = monthNamesShort[now.getMonth()].toUpperCase();
 
   // Days until end of year
-  var one_day=1000*60*60*24;
-  var next_year = new Date((now.getFullYear() + 1), 0, 1);
-  var next_year_days_left = Math.ceil( (next_year.getTime() - now.getTime()) / (one_day) );
+  var oneDay = 1000*60*60*24;
+  var nextYear = new Date((now.getFullYear() + 1), 0, 1);
+  var nextYearDaysLeft = Math.ceil( (nextYear.getTime() - now.getTime()) / (oneDay) );
 
   // Life expectancy
   var lifeExpectancy = 82.3; // google.com/search?q=life+expectancy+canada
-  var majorMinorExpectancy = (lifeExpectancy - years).toFixed(2).toString().split('.');
+  var monthsExpectancy = ((lifeExpectancy - years) * 12).toFixed(2).toString().split('.');
 
 
   requestAnimationFrame(function(){
@@ -85,10 +85,10 @@ App.fn.renderAge = function(){
       day: day,
       month: month,
 
-      next_year_days_left: next_year_days_left,
+      nextYearDaysLeft: nextYearDaysLeft,
 
-      yearExpectancy: majorMinorExpectancy[0],
-      millisExpectancy: majorMinorExpectancy[1],
+      monthsExpectancy: monthsExpectancy[0],
+      monthsMillisExpectancy: monthsExpectancy[1],
     }));
   }.bind(this));
 };
